@@ -1,0 +1,285 @@
+/* Layout principal */
+.layout {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px; /* Agrega margen a todo el contenedor para evitar que se pegue al borde */
+}
+
+/* Contenedor de la cancha de fútbol */
+.soccer-field-container {
+  position: relative;
+  max-width: 500px; /* Mantiene la cancha de un tamaño adecuado */
+  width: 100%;
+  aspect-ratio: 1; /* Mantiene la proporción cuadrada */
+  margin-bottom: 20px; /* Agrega margen debajo de la cancha */
+}
+
+.soccer-field {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.field-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra todo el contenedor sin distorsionar */
+}
+
+/* Controles de formación */
+.formation-controls {
+  display: flex;
+  justify-content: center; /* Centra los botones */
+  gap: 10px;
+  margin-bottom: 20px; /* Espacio entre los botones y la cancha */
+}
+
+.formation-controls button {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Botones de los jugadores sobre el campo */
+.player-button {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Estilos de la lista de jugadores */
+.player-list {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 20px; /* Agrega margen arriba de la tabla para separarla de la cancha */
+}
+
+.player-list h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.player-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.player-list th, .player-list td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.player-list button {
+  background-color: #ff8c00;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.player-list button.bajar-suplentes {
+  background-color: #d9534f; /* Rojo */
+}
+
+.player-list button.bajar-suplentes:hover {
+  background-color: #c9302c; /* Rojo oscuro */
+}
+
+.player-list button.subir-titulares {
+  background-color:  #2f8f2f; /* Verde */
+}
+
+.player-list button.subir-titulares:hover {
+  background-color: #266e26; /* Verde oscuro */
+}
+
+
+.missing-positions, .excess-positions {
+  background-color: #f44336; /* Color rojo */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 12px; /* Reducir tamaño de fuente */
+  position: fixed;
+  bottom: 10px; /* Poner en la parte inferior */
+  left: 50%;
+  transform: translateX(-50%); /* Centrar horizontalmente */
+  width: auto;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.missing-positions {
+  background-color: #ff9800; /* Naranja para posiciones faltantes */
+}
+
+.excess-positions {
+  background-color: #f44336; /* Rojo para posiciones sobrantes */
+}
+
+.missing-positions h4, .excess-positions h4 {
+  margin: 0;
+  font-size: 14px; /* Ajustar tamaño del título */
+}
+
+.missing-positions ul, .excess-positions ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  font-size: 12px; /* Reducir tamaño de la lista */
+}
+
+.missing-positions li, .excess-positions li {
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+/* Responsivo para dispositivos móviles */
+@media (max-width: 767px) {
+  /* Asegurar que el contenedor no se desborde */
+  .layout {
+    flex-direction: column; /* Coloca todo en columna */
+    align-items: center; /* Centra los elementos */
+    gap: 10px;
+  }
+
+  /* Asegurar que el contenedor de la cancha tenga una proporción adecuada */
+  .soccer-field-container {
+    max-width: 100%; /* La cancha ocupa el 100% del contenedor */
+    margin-bottom: 20px; /* Reducir margen */
+    height: auto; /* Dejar que la altura se ajuste */
+    min-height: 200px; /* Añadir una altura mínima para evitar que la imagen se vea muy pequeña */
+    overflow: hidden; /* Evitar que la imagen se desborde */
+  }
+
+  /* Imagen de la cancha */
+  .field-image {
+    width: 100%; /* La imagen ocupa todo el ancho */
+    height: 90%; /* La imagen ocupa toda la altura */
+    object-fit: contain; /* Ajusta la imagen para que no se recorte */
+  }
+
+  /* Ajustar la lista de jugadores */
+  .player-list {
+    padding: 10px; /* Añadir un poco de espacio alrededor */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    box-sizing: border-box; /* Para que el padding no se sume al ancho total */
+  }
+
+  .soccer-field{
+    position: static !important;
+  }
+
+  /* Reducir el tamaño de las tablas */
+  .player-list table {
+    font-size: 12px; /* Ajustar tamaño de fuente */
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho */
+    table-layout: fixed; /* Evitar que la tabla se desborde */
+    overflow-x: auto; /* Permitir desplazamiento si la tabla es muy ancha */
+  }
+
+  .player-list th, .player-list td {
+    word-wrap: break-word; /* Rompe palabras largas para evitar desbordes */
+  }
+
+  /* Botones de los jugadores más pequeños */
+  .player-button {
+    padding: 5px 10px; /* Reducir tamaño de los botones */
+    font-size: 14px; /* Ajuste del tamaño de texto */
+  }
+
+  /* Ajustar botones de la lista de jugadores */
+  .player-list button {
+    padding: 5px 10px; /* Ajuste del tamaño de los botones */
+    font-size: 12px;
+  }
+
+  /* Estilos generales adicionales para prevenir el desbordamiento */
+  * {
+    box-sizing: border-box; /* Asegura que los márgenes y rellenos no afecten el tamaño */
+  }
+
+  /* Evitar márgenes excesivos en dispositivos pequeños */
+  body, .layout, .soccer-field-container, .player-list {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Responsivo para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .layout {
+    flex-direction: row; /* Disposición en fila en pantallas más grandes */
+    justify-content: space-between; /* Asegura que haya espacio entre los elementos */
+  }
+
+  /* Ajustar el tamaño de la cancha */
+  .soccer-field-container {
+    max-width: 450px;
+  }
+
+  .player-list table {
+    font-size: 14px; /* Ajuste del tamaño de la fuente para pantallas de tablet */
+  }
+}
+
+/* Mensajes de posiciones faltantes y sobrantes */
+.missing-positions, .excess-positions {
+  background-color: #f44336; /* Color rojo */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 12px; /* Reducir tamaño de fuente */
+  position: fixed;
+  bottom: 10px; /* Poner en la parte inferior */
+  left: 50%;
+  transform: translateX(-50%); /* Centrar horizontalmente */
+  width: auto;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.missing-positions {
+  background-color: #ff9800; /* Naranja para posiciones faltantes */
+}
+
+.excess-positions {
+  background-color: #f44336; /* Rojo para posiciones sobrantes */
+}
+
+.missing-positions h4, .excess-positions h4 {
+  margin: 0;
+  font-size: 14px; /* Ajustar tamaño del título */
+}
+
+.missing-positions ul, .excess-positions ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  font-size: 12px; /* Reducir tamaño de la lista */
+}
+
+.missing-positions li, .excess-positions li {
+  font-weight: bold;
+}

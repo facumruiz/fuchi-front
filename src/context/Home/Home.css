@@ -1,0 +1,64 @@
+/* Fondo degradado más oscuro con predominio de negro */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #000000 0%, #6a0dad 120%); /* Negro predominante sobre violeta */
+  background-size: 100% 100%; /* Asegura que no haya repetición */
+  color: #ffffff; /* Texto en blanco para visibilidad */
+  min-height: 100vh;
+  background-attachment: fixed; /* Hace que el fondo se fije al hacer scroll */
+}
+
+
+h1 {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+.lead {
+  color: #d1d1d1;
+  font-size: 1.2rem;
+}
+
+.title {
+  font-size: 40px !important;
+}
+
+.soccer-image {
+  max-width: 100% !important; /* Hacer la imagen más pequeña */
+  height: auto;
+}
+
+/* Rotar la imagen en dispositivos móviles (pantallas menores a 768px) */
+@media (max-width: 767px) {
+  .soccer-image {
+    transform: rotate(90deg); /* Rotación de 180 grados */
+    transition: transform 0.3s ease; /* Suaviza la transición */
+    width: 70% !important;
+  }
+}
+
+
+h2 {
+  font-weight: bold; /* Subtítulo en negrita */
+}
+
+/* Asegura que los botones de aplicaciones estén uno al lado del otro en pantallas pequeñas y grandes */
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.d-flex .btn {
+  margin: 1px; /* Espaciado entre botones */
+}

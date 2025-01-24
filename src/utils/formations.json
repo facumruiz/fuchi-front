@@ -1,0 +1,28 @@
+{
+  "4-4-2": [
+    { "id": 1, "label": "GK", "top": "90%", "left": "47%" },
+    { "id": 2, "label": "LB", "top": "70%", "left": "20%" },
+    { "id": 3, "label": "CB", "top": "70%", "left": "35%" },
+    { "id": 4, "label": "CB", "top": "70%", "left": "55%" },
+    { "id": 5, "label": "RB", "top": "70%", "left": "70%" },
+    { "id": 6, "label": "LM", "top": "50%", "left": "20%" },
+    { "id": 7, "label": "CM", "top": "50%", "left": "35%" },
+    { "id": 8, "label": "CM", "top": "50%", "left": "55%" },
+    { "id": 9, "label": "RM", "top": "50%", "left": "70%" },
+    { "id": 10, "label": "ST", "top": "30%", "left": "35%" },
+    { "id": 11, "label": "ST", "top": "30%", "left": "55%" }
+  ],
+  "4-3-3": [
+    { "id": 1, "label": "GK", "top": "90%", "left": "47%" },
+    { "id": 2, "label": "LB", "top": "70%", "left": "20%" },
+    { "id": 3, "label": "CB", "top": "70%", "left": "35%" },
+    { "id": 4, "label": "CB", "top": "70%", "left": "55%" },
+    { "id": 5, "label": "RB", "top": "70%", "left": "70%" },
+    { "id": 6, "label": "LM", "top": "50%", "left": "20%" },
+    { "id": 7, "label": "CM", "top": "50%", "left": "35%" },
+    { "id": 8, "label": "RM", "top": "50%", "left": "70%" },
+    { "id": 9, "label": "ST", "top": "30%", "left": "35%" },
+    { "id": 10, "label": "ST", "top": "30%", "left": "55%" },
+    { "id": 11, "label": "ST", "top": "30%", "left": "75%" }
+  ]
+}

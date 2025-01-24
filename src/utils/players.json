@@ -1,0 +1,18 @@
+[
+    { "id": 1, "name": "Juan Pérez", "position": "GK", "age": 25, "nationality": "Argentina", "edition": "2025" },
+    { "id": 2, "name": "Carlos Gómez", "position": "LB", "age": 28, "nationality": "Chile", "edition": "2025" },
+    { "id": 3, "name": "Luis Martínez", "position": "CB", "age": 26, "nationality": "Brasil", "edition": "2025" },
+    { "id": 4, "name": "Miguel Sánchez", "position": "CB", "age": 30, "nationality": "España", "edition": "2025" },
+    { "id": 5, "name": "José Rodríguez", "position": "RB", "age": 24, "nationality": "México", "edition": "2025" },
+    { "id": 6, "name": "Andrés López", "position": "LM", "age": 27, "nationality": "Colombia", "edition": "2025" },
+    { "id": 7, "name": "Pedro Díaz", "position": "CM", "age": 26, "nationality": "Perú", "edition": "2025" },
+    { "id": 8, "name": "Felipe Ruiz", "position": "CM", "age": 29, "nationality": "Argentina", "edition": "2025" },
+    { "id": 9, "name": "Luis Ángel", "position": "RM", "age": 23, "nationality": "Uruguay", "edition": "2025" },
+    { "id": 10, "name": "Tomás González", "position": "ST", "age": 28, "nationality": "Chile", "edition": "2025" },
+    { "id": 11, "name": "Ricardo Fernández", "position": "ST", "age": 26, "nationality": "Brasil", "edition": "2025" },
+    { "id": 12, "name": "Javier Martín", "position": "GK", "age": 31, "nationality": "España", "edition": "2025" },
+    { "id": 13, "name": "Miguel Ángel", "position": "LB", "age": 27, "nationality": "Argentina", "edition": "2025" },
+    { "id": 14, "name": "Pedro González", "position": "CB", "age": 29, "nationality": "Colombia", "edition": "2025" },
+    { "id": 15, "name": "Carlos Ruiz", "position": "ST", "age": 24, "nationality": "Perú", "edition": "2025" }
+  ]
+  

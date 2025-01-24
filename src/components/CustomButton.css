@@ -1,0 +1,14 @@
+.custom-button {
+    border-color: #b95ce5 !important;
+    color: #b95ce5 !important;
+    font-weight: bold !important;
+    border-radius: 20px !important;
+    padding: 10px 20px !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .custom-button:hover {
+    background-color: #b95ce5 !important;
+    color: white !important;
+  }
+  

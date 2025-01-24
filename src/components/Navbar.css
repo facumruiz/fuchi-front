@@ -1,0 +1,86 @@
+/* Barra de navegación */
+.navbar {
+  padding: 0.5rem 1rem !important; /* Reduce el espacio interno */
+  border-bottom: 1px solid #333;   /* Añade una línea inferior */
+}
+
+.navbar-brand {
+  font-size: 1.5rem; /* Aumenta el tamaño de la marca */
+  padding: 0 !important; /* Elimina relleno adicional */
+  margin: 0 !important; /* Asegura que no haya margen adicional */
+}
+
+.navbar-nav .nav-link {
+  font-size: 1rem; /* Tamaño adecuado para los enlaces */
+  padding: 0.5rem 0.8rem !important; /* Reduce el espacio interno de los enlaces */
+  transition: all 0.3s ease; /* Animación suave al pasar el mouse */
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: #444; /* Cambia el color al pasar el ratón */
+  border-radius: 5px;
+}
+
+.navbar-toggler {
+  padding: 0.25rem 0.5rem !important; /* Reduce el tamaño del botón de toggle */
+}
+
+.container-fluid {
+  max-width: 100% !important; /* Asegura que la barra ocupe el ancho completo */
+}
+
+.collapse {
+  margin: 0 !important; /* Asegura que no haya márgenes innecesarios */
+}
+
+/* Asegura que el avatar tenga tamaño fijo y se vea bien */
+.avatar-img {
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: cover;
+  border: 2px solid #ffffff !important; /* Borde blanco para destacar */
+  margin-left: 10px; /* Agrega espacio entre el avatar y los elementos de la derecha */
+}
+
+/* Alineación en pantallas pequeñas */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.2rem; /* Reducir tamaño de la marca en dispositivos pequeños */
+  }
+
+  .navbar-nav {
+    text-align: center; /* Centra los enlaces */
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 1rem; /* Mantiene el tamaño adecuado de los enlaces */
+  }
+
+  .avatar-img {
+    margin-left: 0; /* Elimina el margen en pantallas pequeñas */
+  }
+
+  /* Centrar el nombre de la app en pantallas pequeñas */
+  .mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Alineación en pantallas grandes (desktop) */
+@media (min-width: 768px) {
+  .navbar-nav {
+    margin-left: auto; /* Alinea los elementos del menú a la derecha */
+  }
+
+  /* Coloca el nombre de la app a la izquierda en pantallas grandes */
+  .mx-auto {
+    margin-left: 0 !important; /* Asegura que el nombre esté a la izquierda */
+    margin-right: auto !important;
+  }
+
+  /* Avatar a la derecha en desktop */
+  .d-flex.align-items-center {
+    margin-left: auto;
+  }
+}
