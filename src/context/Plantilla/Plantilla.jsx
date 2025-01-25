@@ -19,10 +19,10 @@ const getFormation = (formation, formations) => {
 
 // Función para contar la cantidad de jugadores por posición en los titulares
 const countPositions = (starters) => {
-  const positionCount = { GK: 0, LB: 0, CB: 0, RB: 0, LM: 0, RM: 0, CM: 0, ST: 0 };
+  const positionCount = {};
 
   starters.forEach(player => {
-    positionCount[player.position] += 1;
+    positionCount[player.position] = (positionCount[player.position] || 0) + 1;
   });
 
   return positionCount;
@@ -33,32 +33,24 @@ const getPositionDifferences = (formation, starters) => {
   const formationData = getFormation(formation, formationsData);
   const positionCount = countPositions(starters);
 
-  // Se obtienen las posiciones de la formación actual
-  const formationPositions = formationData.map(p => p.label);
-
-  // Contamos las posiciones en la formación seleccionada
-  const maxPositions = {
-    GK: 1,
-    LB: formationPositions.filter(pos => pos === 'LB').length,
-    CB: formationPositions.filter(pos => pos === 'CB').length,
-    RB: formationPositions.filter(pos => pos === 'RB').length,
-    LM: formationPositions.filter(pos => pos === 'LM').length,
-    RM: formationPositions.filter(pos => pos === 'RM').length,
-    CM: formationPositions.filter(pos => pos === 'CM').length,
-    ST: formationPositions.filter(pos => pos === 'ST').length,
-  };
+  // Inicializamos las posiciones requeridas según la formación seleccionada
+  const requiredPositions = {};
+  formationData.forEach(({ label }) => {
+    requiredPositions[label] = (requiredPositions[label] || 0) + 1;
+  });
 
   const missingPositions = [];
   const excessPositions = [];
 
-  // Recorremos las posiciones y verificamos si faltan o sobran jugadores
-  Object.keys(maxPositions).forEach(position => {
-    const count = positionCount[position] || 0;
+  // Verificamos si faltan o sobran jugadores por posición
+  Object.keys(requiredPositions).forEach(position => {
+    const currentCount = positionCount[position] || 0;
+    const requiredCount = requiredPositions[position];
 
-    if (count < maxPositions[position]) {
-      missingPositions.push(position); // Faltan jugadores
-    } else if (count > maxPositions[position]) {
-      excessPositions.push(position); // Sobran jugadores
+    if (currentCount < requiredCount) {
+      missingPositions.push(`${position} (${requiredCount - currentCount})`);
+    } else if (currentCount > requiredCount) {
+      excessPositions.push(`${position} (${currentCount - requiredCount})`);
     }
   });
 
@@ -67,27 +59,25 @@ const getPositionDifferences = (formation, starters) => {
 
 const SoccerField = () => {
   const [formation, setFormation] = useState('4-4-2');
-  const [starters, setStarters] = useState(getStarters(playersData)); // Usamos los datos importados de players.json
-  const [substitutes, setSubstitutes] = useState(getSubstitutes(playersData)); // Usamos los datos importados de players.json
-  const [missingPositions, setMissingPositions] = useState([]); // Estado para las posiciones faltantes
-  const [excessPositions, setExcessPositions] = useState([]); // Estado para las posiciones sobrantes
+  const [starters, setStarters] = useState(getStarters(playersData));
+  const [substitutes, setSubstitutes] = useState(getSubstitutes(playersData));
+  const [missingPositions, setMissingPositions] = useState([]);
+  const [excessPositions, setExcessPositions] = useState([]);
+  const [selectedPosition, setSelectedPosition] = useState(null);
 
-  // Actualiza las posiciones faltantes y sobrantes cuando cambie la formación o los titulares
+
   useEffect(() => {
     const { missingPositions, excessPositions } = getPositionDifferences(formation, starters);
     setMissingPositions(missingPositions);
     setExcessPositions(excessPositions);
   }, [formation, starters]);
 
-  // Función para mover jugadores entre titulares y suplentes
   const togglePlayerStatus = (player, isStarter) => {
     if (isStarter) {
-      // Si el jugador está en titulares, lo movemos a suplentes
       setStarters(starters.filter((p) => p.id !== player.id));
       setSubstitutes([...substitutes, player]);
     } else {
       if (starters.length < 11) {
-        // Si hay espacio en los titulares, movemos a suplentes
         setSubstitutes(substitutes.filter((p) => p.id !== player.id));
         setStarters([...starters, player]);
       } else {
@@ -99,29 +89,66 @@ const SoccerField = () => {
   return (
     <div className="layout">
       <div className="soccer-field-container">
+
+
         <div className="formation-controls">
-          <button className="btn btn-primary" onClick={() => setFormation('4-4-2')}>
-            4-4-2
+          {Object.keys(formationsData).map((formationKey) => (
+            <button
+              key={formationKey}
+              className={`btn btn-primary ${formation === formationKey ? 'active' : ''}`}
+              onClick={() => setFormation(formationKey)}
+            >
+              {formationKey}
+            </button>
+          ))}
+        </div>
+        {/* Botón de estado */}
+        <div className="team-status-button" title="">
+          <button
+            className={`status-button ${missingPositions.length === 0 && excessPositions.length === 0
+              ? 'check'
+              : 'warning'
+              }`}
+            onMouseEnter={() => {
+              const info = `
+          Faltantes: ${missingPositions.join(', ') || 'Ninguno'}
+          Sobrantes: ${excessPositions.join(', ') || 'Ninguno'}
+        `;
+              document.querySelector('.status-tooltip').innerText = info;
+            }}
+            onMouseLeave={() => {
+              document.querySelector('.status-tooltip').innerText = '';
+            }}
+          >
+            {missingPositions.length === 0 && excessPositions.length === 0 ? '✔️' : '⚠️'}
           </button>
-          <button className="btn btn-primary" onClick={() => setFormation('4-3-3')}>
-            4-3-3
-          </button>
+          <div className="status-tooltip"></div>
         </div>
         <div className="soccer-field">
           <img src={pitchImage} alt="Soccer Pitch" className="field-image" />
-          {getFormation(formation, formationsData).map((player) => (
+          {getFormation(formation, formationsData).map((player, index) => (
             <button
-              key={player.id}
+              key={index}
               className="player-button"
-              style={{ top: player.top, left: player.left }}
+              style={{
+                top: player.top,
+                left: player.left,
+                transition: 'top 0.5s ease, left 0.5s ease', // Transición suave
+              }}
+              onClick={() => {
+                setSelectedPosition(player.label); // Actualizamos el estado con la posición seleccionada
+                const filteredPlayers = starters.filter(p => p.position === player.label);
+                console.log(filteredPlayers);
+              }}
             >
               {player.label}
             </button>
           ))}
+
         </div>
       </div>
 
-      {/* Indicador de posiciones faltantes */}
+      {/* Indicador de posiciones faltantes 
       {missingPositions.length > 0 && (
         <div className="missing-positions">
           <h4>Posiciones Faltantes:</h4>
@@ -132,8 +159,9 @@ const SoccerField = () => {
           </ul>
         </div>
       )}
+      */}
 
-      {/* Indicador de posiciones sobrantes */}
+      {/* Indicador de posiciones sobrantes 
       {excessPositions.length > 0 && (
         <div className="excess-positions">
           <h4>Posiciones Sobrantes:</h4>
@@ -144,78 +172,84 @@ const SoccerField = () => {
           </ul>
         </div>
       )}
+        */}
 
       {/* Listado de jugadores titulares */}
       <div className="player-list">
-        <h3>Titulares</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Posición</th>
-              <th>Edad</th>
-              <th>Nacionalidad</th>
-              <th>Edición</th>
-              <th>Acción</th>
-            </tr>
-          </thead>
-          <tbody>
-            {starters.map((player, index) => (
-              <tr key={index}>
-                <td>{player.name}</td>
-                <td>{player.position}</td>
-                <td>{player.age}</td>
-                <td>{player.nationality}</td>
-                <td>{player.edition}</td>
-                <td>
-                  <button 
-                    className="bajar-suplentes" 
-                    onClick={() => togglePlayerStatus(player, true)}
-                  >
-                    Bajar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+  <h3>Titulares</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Posición</th>
+        <th>Edad</th>
+        <th>Nacionalidad</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      {starters.map((player, index) => (
+        <tr
+          key={index}
+          className={player.position === selectedPosition ? 'highlight-titular' : ''}
+        >
+          <td>{player.name}</td>
+          <td>{player.position}</td>
+          <td>{player.age}</td>
+          <td>{player.nationality}</td>
+          <td>
+            <button
+              className="bajar-suplentes"
+              onClick={() => togglePlayerStatus(player, true)}
+            >
+              Bajar
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+
 
       {/* Listado de jugadores suplentes */}
       <div className="player-list">
-        <h3>Suplentes</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Posición</th>
-              <th>Edad</th>
-              <th>Nacionalidad</th>
-              <th>Edición</th>
-              <th>Acción</th>
-            </tr>
-          </thead>
-          <tbody>
-            {substitutes.map((player, index) => (
-              <tr key={index}>
-                <td>{player.name}</td>
-                <td>{player.position}</td>
-                <td>{player.age}</td>
-                <td>{player.nationality}</td>
-                <td>{player.edition}</td>
-                <td>
-                  <button 
-                    className="subir-titulares" 
-                    onClick={() => togglePlayerStatus(player, false)}
-                  >
-                    Subir
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+  <h3>Suplentes</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Posición</th>
+        <th>Edad</th>
+        <th>Nacionalidad</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      {substitutes.map((player, index) => (
+        <tr
+          key={index}
+          className={player.position === selectedPosition ? 'highlight-suplente' : ''}
+        >
+          <td>{player.name}</td>
+          <td>{player.position}</td>
+          <td>{player.age}</td>
+          <td>{player.nationality}</td>
+          <td>
+            <button
+              className="subir-titulares"
+              onClick={() => togglePlayerStatus(player, false)}
+            >
+              Subir
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
     </div>
   );
 };
