@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'; // Ruta según la ubicación del archivo
 import SoccerField from './pages/Plantilla/Plantilla'; // Cancha de fútbol
-import Error404 from './components/Error404'; // Nuevo componente
+import Error404 from './components/Error404'; // Componente de error
 import { getServerStatus } from './services/serverService'; // Importar el servicio
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Incluye Popper.js
 import './App.css';
-
-
 
 const App = () => {
   const [serverOnline, setServerOnline] = useState(null); // 'null' indica que aún no se ha comprobado el estado del servidor
@@ -47,7 +45,6 @@ const App = () => {
     );
   }
 
-
   return (
     <Router>
       <div>
@@ -60,6 +57,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<SoccerField />} />
             <Route path="/plantilla" element={<SoccerField />} />
+            {/* Ruta para manejar las rutas no definidas (Error 404) */}
+            <Route path="*" element={<Error404 />} />
           </Routes>
         )}
       </div>
