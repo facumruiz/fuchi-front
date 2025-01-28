@@ -1,3 +1,14 @@
+/* Aplicar color de fondo y texto gris a toda la aplicación */
+body {
+  background-color: #414850; 
+  color: #ffffff; 
+  font-family: Arial, sans-serif; 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Reglas específicas para la aplicación */
 .App {
   text-align: center;
 }
@@ -14,20 +25,26 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #d3d3d3; /* Cambiar el fondo del encabezado a gris */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #333; /* Color gris oscuro para el texto del encabezado */
 }
 
 .App-link {
-  color: #61dafb;
+  color: #555; /* Gris medio para los enlaces */
+  text-decoration: none;
 }
 
+.App-link:hover {
+  color: #777; /* Gris más oscuro al pasar el cursor */
+}
+
+/* Animación para el logo */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

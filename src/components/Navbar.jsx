@@ -6,7 +6,8 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid d-flex justify-content-between align-items-center">
-        {/* Menú desplegable (izquierda) */}
+
+        {/* Menú desplegable (izquierda)
         <button
           className="navbar-toggler"
           type="button"
@@ -18,39 +19,38 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
+ */}
         {/* Nombre centrado */}
         <div className="navbar-brand fw-bold">
-          Mi App
+          Plantilla
         </div>
-        
-        {/* Avatar (derecha) */}
+
+        {/* Avatar (derecha) 
         <div className="d-flex align-items-center">
           <img
-            src="https://via.placeholder.com/40" // Reemplaza con la URL de tu avatar
-            alt=""
+            src="https://via.placeholder.com/40" 
+            alt="Avatar"
             className="rounded-circle avatar-img"
           />
         </div>
+        */}
       </div>
 
-      {/* Menú colapsable */}
+      {/* Menú colapsable 
       <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav ms-auto"> {/* Alinea los elementos a la derecha */}
+        <ul className="navbar-nav ms-auto"> 
           <li className="nav-item">
-            <a className="nav-link" href="">Inicio</a>
+            <a className="nav-link" href="/">Inicio</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="plantilla">Plantilla</a>
+            <a className="nav-link" href="/preseleccion">Preselección</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="preseleccion">Preselección</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="contratos">Contratos</a>
+            <a className="nav-link" href="/contratos">Contratos</a>
           </li>
         </ul>
       </div>
+      */}
     </nav>
   );
 };

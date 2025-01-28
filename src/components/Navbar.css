@@ -46,6 +46,7 @@
 @media (max-width: 768px) {
   .navbar-brand {
     font-size: 1.2rem; /* Reducir tamaño de la marca en dispositivos pequeños */
+    text-align: center; /* Centra los enlaces */
   }
 
   .navbar-nav {
