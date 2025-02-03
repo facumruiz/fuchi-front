@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Leer la URL base desde el entorno y agregarle el sufijo '/record'
-const API_URL = `${process.env.REACT_APP_API_BASE_URL}/record`;
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}/player`;
 
 // Función para obtener jugadores desde la API
 export const getPlayers = async () => {
