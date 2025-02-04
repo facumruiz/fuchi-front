@@ -177,11 +177,11 @@ const SoccerField = () => {
           <ModalPlantilla />
         </div>
 
-        <div className="formation-controls">
+        <div className="formation-controls pr-2">
           {Object.keys(formationsData).map((formationKey) => (
             <button
               key={formationKey}
-              className={`btn btn-primary ${formation === formationKey ? 'active' : ''}`}
+              className={`btn btn-primary ${formation === formationKey ? 'active' : ''} me-2`}
               onClick={() => setFormation(formationKey)}
             >
               {formationKey}

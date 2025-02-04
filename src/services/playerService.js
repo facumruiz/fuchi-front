@@ -12,8 +12,9 @@ export const getPlayers = async () => {
     // Filtramos los jugadores en titulares y suplentes
     const titulares = jugadores.filter(jugador => jugador.perfilFutbolistico.estado === 'Titular');
     const suplentes = jugadores.filter(jugador => jugador.perfilFutbolistico.estado === 'Suplente');
+    const preseleccion = jugadores.filter(jugador => jugador.perfilFutbolistico.estado === 'Preseleccionado');
 
-    return { titulares, suplentes }; // Devolvemos dos listas: titulares y suplentes
+    return { titulares, suplentes, preseleccion }; // Devolvemos dos listas: titulares y suplentes
   } catch (error) {
     console.error('Error fetching players:', error);
     throw error;
@@ -27,6 +28,18 @@ export const updatePlayerStatus = async (id, newStatus) => {
     return response.data; // Retorna el jugador actualizado
   } catch (error) {
     console.error(`Error updating player status for ID ${id}:`, error);
+    throw error;
+  }
+};
+
+
+// Función para eliminar un jugador
+export const deletePlayer = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/${id}`);
+    return response.data; // Retorna la respuesta del servidor
+  } catch (error) {
+    console.error(`Error deleting player with ID ${id}:`, error);
     throw error;
   }
 };

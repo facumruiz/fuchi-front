@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'; // Ruta según la ubicación del archivo
 import SoccerField from './pages/Plantilla/Plantilla'; // Cancha de fútbol
+import SoccerDetails from './pages/Detalle/Detalle';
 import Error404 from './components/Error404'; // Componente de error
 import { getServerStatus } from './services/serverService'; // Importar el servicio
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -57,6 +58,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<SoccerField />} />
             <Route path="/plantilla" element={<SoccerField />} />
+           
+            <Route path="/detalle" element={<SoccerDetails />} />
+
             {/* Ruta para manejar las rutas no definidas (Error 404) */}
             <Route path="*" element={<Error404 />} />
           </Routes>
